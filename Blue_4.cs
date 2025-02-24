@@ -25,7 +25,14 @@ namespace Lab_6
                 }
             }
 
-            public int TotalScore => _scores.Sum();
+            public int TotalScore
+             {
+                get
+                {
+                    if (_scores == null || _scores.Length == 0) return 0;
+                    return _scores.Sum();
+                }
+            }
             
             public Team(string name)
             {
@@ -35,6 +42,7 @@ namespace Lab_6
 
             public void PlayMatch(int result)
             {
+                if (_scores == null) return;
                 Array.Resize(ref _scores, _scores.Length + 1);
                 _scores[_scores.Length - 1] = result;
             }
@@ -73,6 +81,7 @@ namespace Lab_6
 
             public void Add(Team team)
             {
+                if (_teams == null || _teams.Length == 0) return;
                 
                 if (_teams.Length < 12)
                 {
@@ -111,6 +120,7 @@ namespace Lab_6
 
             public static Group Merge(Group group1, Group group2, int size)
             {
+                if (size <= 0) return default(Group);
                 Group finalGroup = new Group("Финалисты");
                 int mergedGroup = size / 2;
                 int i = 0, j = 0;

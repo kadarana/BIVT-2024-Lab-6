@@ -111,6 +111,7 @@ namespace Lab_6
             }
             public void Add(Sportsman sportsman)
             {
+                if (_sportsmen == null || _sportsmen.Length == 0) return;
                 Array.Resize(ref _sportsmen, _sportsmen.Length + 1);
                 _sportsmen[_sportsmen.Length - 1] = sportsman;
 

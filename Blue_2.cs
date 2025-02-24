@@ -57,25 +57,24 @@ namespace Lab_6
             public void Jump(int[] result)
             {
                 if (result == null || _marks == null || result.Length != _marks.GetLength(1)) return;
-                for (int i = 0; i < _marks.GetLength(0); i++)
+                int count1 = 0;
+                int count2 = 0;
+                for (int j = 0; j < _marks.GetLength(1); j++)
                 {
-                    bool flag = true;
-               
-                    for (int j = 0; j < _marks.GetLength(1); j++)
-                    {
-                        if (_marks[i, j] != 0)
-                        {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (flag)
-                    {
-                        for (int j = 0; j < _marks.GetLength(1); j++)
-                            _marks[i, j] = result[j];
-                        break;
-                    }
+                    count1 += _marks[0, j];
+                    count2 += _marks[1, j];
                 }
+                if (count1 == 0)
+                {
+                    for (int j = 0; j < _marks.GetLength(1); j++)
+                        _marks[0, j] = result[j];
+                }
+                else if (count2 == 0)
+                {
+                    for (int j = 0; j < _marks.GetLength(1); j++)
+                        _marks[1, j] = result[j];
+                }
+                
             }
 
             public static void Sort(Participant[] array)
