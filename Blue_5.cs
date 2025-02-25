@@ -44,7 +44,7 @@ namespace Lab_6
         {
             private string _name;
             private Sportsman[] _sportsmen;
-
+            private int _curInd;
             public string Name => _name;
             public Sportsman[] Sportsmen => _sportsmen;
             
@@ -102,13 +102,14 @@ namespace Lab_6
             public Team(string name)
             {
                 _name = name;
-                _sportsmen = new Sportsman[0];
+                _sportsmen = new Sportsman[6];
+                _curInd = 0;
             }
             public void Add(Sportsman sportsman)
             {
-                if (_sportsmen == null) return;
-                Array.Resize(ref _sportsmen, _sportsmen.Length + 1);
-                _sportsmen[_sportsmen.Length - 1] = sportsman;
+                if (_sportsmen == null || _curInd == 6) return;
+                _sportsmen[_curInd] = sportsman;
+                _curInd++;
 
             }
             public void Add(Sportsman[] sportsmen)

@@ -12,7 +12,7 @@ namespace Lab_6
         {
             private string _name;
             private int[] _scores; // массив очков, полученных за матчи 
-
+            private int _curInd;
             public string Name => _name;
             public int[] Scores
             {
@@ -38,14 +38,15 @@ namespace Lab_6
             public Team(string name)
             {
                 _name = name;
-                _scores = new int[0];
+                _scores = new int[10];
+                _curInd = 0;
             }
 
             public void PlayMatch(int result)
             {
-                if (_scores == null) return;
-                Array.Resize(ref _scores, _scores.Length + 1);
-                _scores[_scores.Length - 1] = result;
+                if (_scores == null || _curInd >= _scores.Length) return;
+                _scores[_curInd] = result;
+                _curInd++;
             }
 
             public void Print()
@@ -61,6 +62,7 @@ namespace Lab_6
         {
             private string _name;
             private Team[] _teams;
+            private int _currentIndex;
 
             public string Name => _name;
             public Team[] Teams => _teams;
@@ -69,18 +71,16 @@ namespace Lab_6
             public Group(string name)
             {
                 _name = name;
-                _teams = new Team[0];
+                _teams = new Team[12];
+                _currentIndex = 0;
             }
 
             public void Add(Team team)
             {
-                if (_teams == null) return;
-                
-                if (_teams.Length < 12)
-                {
-                    Array.Resize(ref _teams, _teams.Length + 1);
-                    _teams[_teams.Length - 1] = team;
-                }
+                if (_teams == null || _currentIndex >= _teams.Length) return;
+                _teams[_currentIndex++] = team;
+
+   
 
             }
             public void Add(Team[] teams)
@@ -95,7 +95,8 @@ namespace Lab_6
             public void Sort()
             {
                 if (_teams == null) return;
-                for (int i = 1, j = 2; i < _teams.Length; i++)
+                // гномья эффективная сортировка 
+                for (int i = 1, j = 2; i < _teams.Length ; )
                 {
                     if (i == 0 || _teams[i].TotalScore > _teams[i - 1].TotalScore)
                     {
@@ -152,6 +153,7 @@ namespace Lab_6
                 Console.WriteLine(_name);
                 foreach (var team in _teams)
                 {
+                  
                     team.Print();
                 }
             }
