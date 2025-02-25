@@ -56,22 +56,22 @@ namespace Lab_6
             // метод
             public void Jump(int[] result)
             {
-                if (result == null || _marks == null || result.Length != _marks.GetLength(1)) return;
+                if (result == null || _marks == null || result.Length < 5) return;
                 int count1 = 0;
                 int count2 = 0;
-                for (int j = 0; j < _marks.GetLength(1); j++)
+                for (int j = 0; j < 5; j++)
                 {
                     count1 += _marks[0, j];
                     count2 += _marks[1, j];
                 }
                 if (count1 == 0)
                 {
-                    for (int j = 0; j < _marks.GetLength(1); j++)
+                    for (int j = 0; j < 5; j++)
                         _marks[0, j] = result[j];
                 }
                 else if (count2 == 0)
                 {
-                    for (int j = 0; j < _marks.GetLength(1); j++)
+                    for (int j = 0; j < 5; j++)
                         _marks[1, j] = result[j];
                 }
                 

@@ -25,7 +25,7 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_penaltyTimes == null || _penaltyTimes.Length == 0) return null;
+                    if (_penaltyTimes == null) return null;
                     int[] copy = new int[_penaltyTimes.Length];
                     Array.Copy(_penaltyTimes, copy, _penaltyTimes.Length);
                     return copy;
@@ -37,7 +37,7 @@ namespace Lab_6
                 get
 
                 {
-                    if (_penaltyTimes == null || _penaltyTimes.Length == 0) return 0;
+                    if (_penaltyTimes == null) return 0;
 
                     else
                         return _penaltyTimes.Sum();
@@ -69,7 +69,7 @@ namespace Lab_6
 
             public void PlayMatch(int time)
             {
-                if (_penaltyTimes == null || _penaltyTimes.Length == 0) return;
+                if (_penaltyTimes == null) return;
                 // добавляет в массив штрафов штрафное время
                 Array.Resize(ref _penaltyTimes, _penaltyTimes.Length + 1);
                 _penaltyTimes[_penaltyTimes.Length - 1] = time;

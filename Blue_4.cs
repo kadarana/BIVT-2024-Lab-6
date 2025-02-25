@@ -17,19 +17,20 @@ namespace Lab_6
             public int[] Scores
             {
                 get
-                { 
-                    if (_scores == null || _scores.Length == 0) return default(int[]);
+                {
+                    if (_scores == null) return default(int[]);
                     int[] copy = new int[_scores.Length];
                     Array.Copy(_scores, copy, _scores.Length);
                     return copy;
                 }
             }
+            
 
             public int TotalScore
-             {
+            {
                 get
                 {
-                    if (_scores == null || _scores.Length == 0) return 0;
+                    if (_scores == null) return 0;
                     return _scores.Sum();
                 }
             }
@@ -62,16 +63,8 @@ namespace Lab_6
             private Team[] _teams;
 
             public string Name => _name;
-            public Team[] Teams
-            {
-                get
-                {
-                    if (_teams == null || _teams.Length == 0) return default(Team[]);
-                    Team[] copy = new Team[_teams.Length];
-                    Array.Copy(_teams, copy, _teams.Length);
-                    return copy;
-                }
-            }
+            public Team[] Teams => _teams;
+           
 
             public Group(string name)
             {
@@ -81,7 +74,7 @@ namespace Lab_6
 
             public void Add(Team team)
             {
-                if (_teams == null || _teams.Length == 0) return;
+                if (_teams == null) return;
                 
                 if (_teams.Length < 12)
                 {
@@ -92,7 +85,7 @@ namespace Lab_6
             }
             public void Add(Team[] teams)
             {
-                if (teams == null || teams.Length == 0) return;
+                if (teams == null) return;
                 foreach (var team in teams)
                 {
                     Add(team);
@@ -101,7 +94,7 @@ namespace Lab_6
             }
             public void Sort()
             {
-                if (_teams == null || _teams.Length == 0) return;
+                if (_teams == null) return;
                 for (int i = 1, j = 2; i < _teams.Length; i++)
                 {
                     if (i == 0 || _teams[i].TotalScore > _teams[i - 1].TotalScore)

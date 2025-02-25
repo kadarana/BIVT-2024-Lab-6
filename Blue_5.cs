@@ -46,21 +46,13 @@ namespace Lab_6
             private Sportsman[] _sportsmen;
 
             public string Name => _name;
-            public Sportsman[] Sportsmen
-            {
-                get
-                {
-                    if (_sportsmen == null || _sportsmen.Length == 0) return null;
-                    Sportsman[] copy = new Sportsman[_sportsmen.Length];
-                    Array.Copy(_sportsmen, copy, _sportsmen.Length);
-                    return copy;
-                }
-            }
+            public Sportsman[] Sportsmen => _sportsmen;
+            
             public int SummaryScore
             {
                 get
                 {
-                    if (_sportsmen == null || _sportsmen.Length == 0) return 0;
+                    if (_sportsmen == null) return 0;
                     int sum = 0;
                     for(int i = 0; i < _sportsmen.Length; i++)
                     {
@@ -95,11 +87,14 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_sportsmen == null || _sportsmen.Length == 0) return 0;
-                    int min = int.MaxValue;
-                    for (int i = 0; i < _sportsmen.Length; i++)
-                    {
-                         if (_sportsmen[i].Place < min) min = _sportsmen[i].Place;
+                    if (_sportsmen == null) return 0;
+                    int min = 18;
+                    
+                    foreach (Sportsman sportsman in _sportsmen) 
+                    { 
+                        if (sportsman.Place < min && sportsman.Place != 0)
+                            min = sportsman.Place;  
+                         
                     }
                     return min;
                 }
@@ -111,21 +106,21 @@ namespace Lab_6
             }
             public void Add(Sportsman sportsman)
             {
-                if (_sportsmen == null || _sportsmen.Length == 0) return;
+                if (_sportsmen == null) return;
                 Array.Resize(ref _sportsmen, _sportsmen.Length + 1);
                 _sportsmen[_sportsmen.Length - 1] = sportsman;
 
             }
             public void Add(Sportsman[] sportsmen)
             {
-                if (sportsmen == null || sportsmen.Length == 0) return;
+                if (sportsmen == null) return;
                 foreach (var sportsman in sportsmen)
                     Add(sportsman);
             }
 
             public static void Sort(Team[] teams)
             {
-                if (teams == null || teams.Length == 0) return;
+                if (teams == null || teams.Length <= 1) return;
 
                 for (int i = 0; i  < teams.Length; i++)
                 {
