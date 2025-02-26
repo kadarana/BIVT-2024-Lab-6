@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab_6
+
 {
     public class Blue_4
     {
@@ -12,7 +13,7 @@ namespace Lab_6
         {
             private string _name;
             private int[] _scores; // массив очков, полученных за матчи 
-            private int _curInd;
+
             public string Name => _name;
             public int[] Scores
             {
@@ -24,7 +25,7 @@ namespace Lab_6
                     return copy;
                 }
             }
-            
+
 
             public int TotalScore
             {
@@ -34,19 +35,19 @@ namespace Lab_6
                     return _scores.Sum();
                 }
             }
-            
+
             public Team(string name)
             {
                 _name = name;
-                _scores = new int[10];
-                _curInd = 0;
+                _scores = new int[0];
+
             }
 
             public void PlayMatch(int result)
             {
-                if (_scores == null || _curInd >= _scores.Length) return;
-                _scores[_curInd] = result;
-                _curInd++;
+                if (_scores == null) return;
+                Array.Resize(ref _scores, _scores.Length + 1);
+                _scores[_scores.Length - 1] = result;
             }
 
             public void Print()
@@ -66,7 +67,7 @@ namespace Lab_6
 
             public string Name => _name;
             public Team[] Teams => _teams;
-           
+
 
             public Group(string name)
             {
@@ -80,7 +81,7 @@ namespace Lab_6
                 if (_teams == null || _currentIndex >= _teams.Length) return;
                 _teams[_currentIndex++] = team;
 
-   
+
 
             }
             public void Add(Team[] teams)
@@ -96,9 +97,9 @@ namespace Lab_6
             {
                 if (_teams == null) return;
                 // гномья эффективная сортировка 
-                for (int i = 1, j = 2; i < _teams.Length ; )
+                for (int i = 1, j = 2; i < _teams.Length;)
                 {
-                    if (i == 0 || _teams[i].TotalScore > _teams[i - 1].TotalScore)
+                    if (i == 0 || _teams[i].TotalScore <= _teams[i - 1].TotalScore)
                     {
                         i = j;
                         j++;
@@ -116,7 +117,7 @@ namespace Lab_6
             {
                 if (size <= 0) return default(Group);
                 Group finalGroup = new Group("Финалисты");
-                int mergedGroup = size / 2;
+                int mergedGroup = 6; // количество лучших команд из каждой группы
                 int i = 0, j = 0;
                 while (i < mergedGroup && j < mergedGroup)
                 {
@@ -130,11 +131,11 @@ namespace Lab_6
                         finalGroup.Add(group2.Teams[j]);
                         j++;
                     }
-                     
+
                 }
 
                 while (i < mergedGroup)
-                { 
+                {
                     finalGroup.Add(group1.Teams[i]);
                     i++;
                 }
@@ -153,7 +154,7 @@ namespace Lab_6
                 Console.WriteLine(_name);
                 foreach (var team in _teams)
                 {
-                  
+
                     team.Print();
                 }
             }

@@ -123,22 +123,22 @@ namespace Lab_6
             {
                 if (teams == null || teams.Length <= 1) return;
 
-                for (int i = 0; i  < teams.Length; i++)
+                for (int i = 0; i < teams.Length; i++)
                 {
                     for (int j = 0; j < teams.Length - i - 1; j++)
                     {
-                        if (teams[j].SummaryScore > teams[j + 1].SummaryScore)
-
+                        if (teams[j].SummaryScore < teams[j + 1].SummaryScore)
+                        {
                             (teams[j], teams[j + 1]) = (teams[j + 1], teams[j]);
-
-
+                        }
                         else if (teams[j].SummaryScore == teams[j + 1].SummaryScore && teams[j].TopPlace > teams[j + 1].TopPlace)
-
-                            (teams[j], teams[j + 1]) = (teams[j], teams[j + 1]);
+                        {
+                            (teams[j], teams[j + 1]) = (teams[j + 1], teams[j]);
+                        }
                     }
                 }
-
             }
+
             public void Print()
             {
                 Console.WriteLine($"Name: {_name}, Summary score: {SummaryScore}, Top Place: {TopPlace}");
